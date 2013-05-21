@@ -1,4 +1,2 @@
-webgl-coffeescript
-==================
-
-WebGL tutorials in coffeescript
+webgl_tutorials
+===============
