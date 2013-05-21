@@ -1,7 +1,7 @@
 class webGLLessons
   constructor: (canvas_id,picker_id) ->
     @canvas_id = canvas_id
-    @picker_id = picker_id
+    @picker_id = picker_id 
     @lessons = {}
 
   add: (name,lesson) ->
@@ -10,8 +10,10 @@ class webGLLessons
   list: ->
     _.keys( @lessons )
   render_picker: ->
+    $picker = $( '#' + @picker_id )
+    $picker.empty()
     for name in @list()
-      $( '#' + @picker_id ).append( $('<li>').text(name).on('click', @render_lesson ) )
+      $picker.append $('<li>').text(name).on('click', @render_lesson ) 
   render_lesson: (e) =>
     name = $(e.target).text()
     if name in @list()

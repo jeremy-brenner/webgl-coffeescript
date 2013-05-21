@@ -21,13 +21,15 @@
     };
 
     webGLLessons.prototype.render_picker = function() {
-      var name, _i, _len, _ref, _results;
+      var $picker, name, _i, _len, _ref, _results;
 
+      $picker = $('#' + this.picker_id);
+      $picker.empty();
       _ref = this.list();
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         name = _ref[_i];
-        _results.push($('#' + this.picker_id).append($('<li>').text(name).on('click', this.render_lesson)));
+        _results.push($picker.append($('<li>').text(name).on('click', this.render_lesson)));
       }
       return _results;
     };

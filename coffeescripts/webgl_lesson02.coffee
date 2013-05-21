@@ -1,5 +1,5 @@
 
-class webGLLesson01
+class webGLLesson02
   constructor: (canvas_id) ->
     @canvas = document.getElementById canvas_id
 
@@ -132,7 +132,7 @@ class webGLLesson01
 
     #draw square
     squareVector = vec3.create()
-    vec3.set squareVector, 3.0, 0.0, 0.0 
+    vec3.set squareVector, 4.0, 0.0, 0.0 
     
     mat4.translate @mvMatrix, @mvMatrix, squareVector
 
@@ -145,4 +145,4 @@ class webGLLesson01
 
 
 jQuery ->
-  web_gl_lessons.add( "Lesson01", webGLLesson01 )
+  web_gl_lessons.add( "Lesson02", webGLLesson02 )
