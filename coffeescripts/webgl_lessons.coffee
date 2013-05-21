@@ -14,7 +14,10 @@ class webGLLessons
     $picker.empty()
     for name in @list()
       $picker.append $('<li>').text(name).on('click', @render_lesson ) 
+  highlight_lesson: (e) ->
+    $(e.target).addClass('selected').siblings().removeClass('selected')
   render_lesson: (e) =>
+    @highlight_lesson(e)
     name = $(e.target).text()
     if name in @list()
       new @lessons[name](@canvas_id)

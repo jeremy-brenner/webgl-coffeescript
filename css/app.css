@@ -12,3 +12,7 @@ li {
 li:hover {
   background-color: #CCCCCC;
 }
+
+li.selected {
+  background-color: #6666FF;
+}

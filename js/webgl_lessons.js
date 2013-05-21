@@ -34,9 +34,14 @@
       return _results;
     };
 
+    webGLLessons.prototype.highlight_lesson = function(e) {
+      return $(e.target).addClass('selected').siblings().removeClass('selected');
+    };
+
     webGLLessons.prototype.render_lesson = function(e) {
       var name;
 
+      this.highlight_lesson(e);
       name = $(e.target).text();
       if (__indexOf.call(this.list(), name) >= 0) {
         return new this.lessons[name](this.canvas_id);
