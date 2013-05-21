@@ -1,5 +1,5 @@
 
-class webGLTutorial
+class webGLLesson01
   constructor: (canvas_id) ->
     @canvas = document.getElementById canvas_id
 
@@ -143,5 +143,6 @@ class webGLTutorial
   
     @gl.drawArrays @gl.TRIANGLE_STRIP, 0, @squareVertexPositionBuffer.numItems
 
+
 jQuery ->
-  new webGLTutorial('webgl-canvas')
+  web_gl_lessons.add( "Lesson01", webGLLesson01 )
