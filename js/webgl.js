@@ -86,16 +86,22 @@
     };
 
     webGLTutorial.prototype.drawScene = function() {
+      var squareVector, triangleVector;
+
       this.gl.viewport(0, 0, this.gl.viewportWidth, this.gl.viewportHeight);
       this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-      mat4.perspective(45, this.gl.viewportWidth / this.gl.viewportHeight, 0.1, 100.0, this.pMatrix);
+      mat4.perspective(this.pMatrix, 45, this.gl.viewportWidth / this.gl.viewportHeight, 0.1, 100.0);
       mat4.identity(this.mvMatrix);
-      mat4.translate(this.mvMatrix, this.mvMatrix, [-1.5, 0.0, -7.0]);
+      triangleVector = vec3.create();
+      vec3.set(triangleVector, -1.5, 0.0, -7.0);
+      mat4.translate(this.mvMatrix, this.mvMatrix, triangleVector);
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.triangleVertexPositionBuffer);
       this.gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.triangleVertexPositionBuffer.itemSize, this.gl.FLOAT, false, 0, 0);
       this.setMatrixUniforms();
       this.gl.drawArrays(this.gl.TRIANGLES, 0, this.triangleVertexPositionBuffer.numItems);
-      mat4.translate(this.mvMatrix, this.mvMatrix, [3.0, 0.0, 0.0]);
+      squareVector = vec3.create();
+      vec3.set(squareVector, 3.0, 0.0, 0.0);
+      mat4.translate(this.mvMatrix, this.mvMatrix, squareVector);
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.squareVertexPositionBuffer);
       this.gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.squareVertexPositionBuffer.itemSize, this.gl.FLOAT, false, 0, 0);
       this.setMatrixUniforms();

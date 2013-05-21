@@ -112,14 +112,16 @@ class webGLTutorial
     #scene setup
     @gl.viewport 0, 0, @gl.viewportWidth, @gl.viewportHeight
     @gl.clear @gl.COLOR_BUFFER_BIT | @gl.DEPTH_BUFFER_BIT
-    mat4.perspective 45, @gl.viewportWidth / @gl.viewportHeight, 0.1, 100.0, @pMatrix
+    mat4.perspective @pMatrix, 45, @gl.viewportWidth / @gl.viewportHeight, 0.1, 100.0
 
 
     mat4.identity @mvMatrix
 
     #draw triangle
+    triangleVector = vec3.create()
+    vec3.set triangleVector, -1.5, 0.0, -7.0 
 
-    mat4.translate @mvMatrix, @mvMatrix, [-1.5, 0.0, -7.0] 
+    mat4.translate @mvMatrix, @mvMatrix, triangleVector
 
     @gl.bindBuffer @gl.ARRAY_BUFFER, @triangleVertexPositionBuffer
     @gl.vertexAttribPointer @shaderProgram.vertexPositionAttribute, @triangleVertexPositionBuffer.itemSize, @gl.FLOAT, false, 0, 0
@@ -129,7 +131,10 @@ class webGLTutorial
 
 
     #draw square
-    mat4.translate @mvMatrix, @mvMatrix, [3.0, 0.0, 0.0]
+    squareVector = vec3.create()
+    vec3.set squareVector, 3.0, 0.0, 0.0 
+    
+    mat4.translate @mvMatrix, @mvMatrix, squareVector
 
     @gl.bindBuffer @gl.ARRAY_BUFFER, @squareVertexPositionBuffer
     @gl.vertexAttribPointer @shaderProgram.vertexPositionAttribute, @squareVertexPositionBuffer.itemSize, @gl.FLOAT, false, 0, 0
