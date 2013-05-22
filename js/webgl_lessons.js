@@ -43,8 +43,11 @@
 
       this.highlight_lesson(e);
       name = $(e.target).text();
+      if (this.current) {
+        this.current.stop();
+      }
       if (__indexOf.call(this.list(), name) >= 0) {
-        return new this.lessons[name](this.canvas_id);
+        return this.current = new this.lessons[name](this.canvas_id);
       } else {
         return console.log("" + name + " doesn't exist.");
       }

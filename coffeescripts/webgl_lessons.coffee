@@ -19,8 +19,10 @@ class webGLLessons
   render_lesson: (e) =>
     @highlight_lesson(e)
     name = $(e.target).text()
+    if @current
+      @current.stop()
     if name in @list()
-      new @lessons[name](@canvas_id)
+      @current = new @lessons[name](@canvas_id)
     else 
       console.log "#{name} doesn't exist."
 

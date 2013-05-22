@@ -19,13 +19,20 @@
       this.rTri = 0;
       this.rSquare = 0;
       this.mvMatrixStack = [];
+      this.running = true;
       this.tick();
     }
 
+    webGLLesson03.prototype.stop = function() {
+      return this.running = false;
+    };
+
     webGLLesson03.prototype.tick = function() {
-      requestAnimFrame(this.tick);
-      this.drawScene();
-      return this.animate();
+      if (this.running) {
+        requestAnimFrame(this.tick);
+        this.drawScene();
+        return this.animate();
+      }
     };
 
     webGLLesson03.prototype.shaderFs = "precision mediump float;\n\nvarying vec4 vColor;\n\nvoid main(void) {\n  gl_FragColor = vColor;\n}";

@@ -13,6 +13,9 @@ class webGLLesson01
 
     @drawScene()
 
+  stop: ->
+    #noop
+
   shaderFs: 
     """
       precision mediump float;

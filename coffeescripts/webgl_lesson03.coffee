@@ -17,13 +17,18 @@ class webGLLesson03
     @rTri = 0
     @rSquare = 0
     @mvMatrixStack = []
+    @running = true
 
     @tick()
   
+  stop: ->
+    @running = false
+
   tick: =>
-    requestAnimFrame @tick
-    @drawScene()
-    @animate()
+    if @running
+      requestAnimFrame @tick 
+      @drawScene()
+      @animate()
 
   shaderFs: 
     """

@@ -14,6 +14,8 @@
       this.drawScene();
     }
 
+    webGLLesson01.prototype.stop = function() {};
+
     webGLLesson01.prototype.shaderFs = "precision mediump float;\n\nvoid main(void) {\n  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n}";
 
     webGLLesson01.prototype.shaderVs = "attribute vec3 aVertexPosition;\n\nuniform mat4 uMVMatrix;\nuniform mat4 uPMatrix;\n\nvoid main(void) {\n    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);\n}";
