@@ -1,11 +1,19 @@
-ul {
+ul, canvas {
+  display: inline-block;
+  vertical-align: top;
+}
+
+canvas#webgl-canvas {
+  border: none;
+}
+
+ul#lesson-picker {
   list-style-type: none;
 }
 
 li { 
   border: solid 1px black;
   padding: 5px;
-  display: inline; 
   background-color: #AAAAAA;
 }
 
