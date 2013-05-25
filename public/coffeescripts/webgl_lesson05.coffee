@@ -15,7 +15,7 @@ class webGLLesson
     @gl.enable @gl.DEPTH_TEST
 
     @xRot = 0
-    @yRot = 270
+    @yRot = 0
     @zRot = 0
 
     @mvMatrixStack = []
@@ -216,7 +216,7 @@ class webGLLesson
     #draw cube
     cubeVector = vec3.create()
 
-    vec3.set cubeVector, 0.0, 0.0, -5.0 
+    vec3.set cubeVector, 0.0, 0.0, -3.5 
     
     mat4.translate @mvMatrix, @mvMatrix, cubeVector
     
@@ -264,9 +264,9 @@ class webGLLesson
     timeNow = new Date().getTime()
     if @lastTime
       elapsed = timeNow - @lastTime
-      @xRot += (90 * elapsed) / 1000.0 
-      @yRot += (90 * elapsed) / 1000.0 
-      @zRot += (90 * elapsed) / 1000.0 
+      @xRot += (15 * elapsed) / 1000.0 
+      @yRot += (10 * elapsed) / 1000.0 
+      @zRot += (20 * elapsed) / 1000.0 
     @lastTime = timeNow
 
   mvPushMatrix: ->

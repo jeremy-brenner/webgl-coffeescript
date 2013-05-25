@@ -15,7 +15,7 @@
       this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
       this.gl.enable(this.gl.DEPTH_TEST);
       this.xRot = 0;
-      this.yRot = 270;
+      this.yRot = 0;
       this.zRot = 0;
       this.mvMatrixStack = [];
       this.running = true;
@@ -118,7 +118,7 @@
       mat4.perspective(this.pMatrix, 45, this.gl.viewportWidth / this.gl.viewportHeight, 0.1, 100.0);
       mat4.identity(this.mvMatrix);
       cubeVector = vec3.create();
-      vec3.set(cubeVector, 0.0, 0.0, -5.0);
+      vec3.set(cubeVector, 0.0, 0.0, -3.5);
       mat4.translate(this.mvMatrix, this.mvMatrix, cubeVector);
       mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
       mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.yRot), [0, 1, 0]);
@@ -164,9 +164,9 @@
       timeNow = new Date().getTime();
       if (this.lastTime) {
         elapsed = timeNow - this.lastTime;
-        this.xRot += (90 * elapsed) / 1000.0;
-        this.yRot += (90 * elapsed) / 1000.0;
-        this.zRot += (90 * elapsed) / 1000.0;
+        this.xRot += (15 * elapsed) / 1000.0;
+        this.yRot += (10 * elapsed) / 1000.0;
+        this.zRot += (20 * elapsed) / 1000.0;
       }
       return this.lastTime = timeNow;
     };
