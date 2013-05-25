@@ -25,5 +25,8 @@ class webGLLessons
       @current = new @lessons[name](@canvas_id)
     else 
       console.log "#{name} doesn't exist."
+      
+window.degToRad = (degrees) ->
+  degrees * Math.PI / 180
 
 window.web_gl_lessons = new webGLLessons('webgl-canvas','lesson-picker')

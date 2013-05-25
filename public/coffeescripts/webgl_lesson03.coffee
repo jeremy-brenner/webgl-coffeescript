@@ -1,7 +1,4 @@
 
-window.degToRad = (degrees) ->
-  degrees * Math.PI / 180
-
 class webGLLesson
   constructor: (canvas_id) ->
     @canvas = document.getElementById canvas_id

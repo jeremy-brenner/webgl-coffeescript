@@ -3,10 +3,6 @@
   var webGLLesson,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  window.degToRad = function(degrees) {
-    return degrees * Math.PI / 180;
-  };
-
   webGLLesson = (function() {
     function webGLLesson(canvas_id) {
       this.tick = __bind(this.tick, this);      this.canvas = document.getElementById(canvas_id);

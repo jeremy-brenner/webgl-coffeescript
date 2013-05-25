@@ -57,6 +57,10 @@
 
   })();
 
+  window.degToRad = function(degrees) {
+    return degrees * Math.PI / 180;
+  };
+
   window.web_gl_lessons = new webGLLessons('webgl-canvas', 'lesson-picker');
 
 }).call(this);
