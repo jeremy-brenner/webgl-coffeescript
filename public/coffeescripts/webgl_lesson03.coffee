@@ -1,5 +1,8 @@
 
-class webGLLesson02
+window.degToRad = (degrees) ->
+  degrees * Math.PI / 180
+
+class webGLLesson
   constructor: (canvas_id) ->
     @canvas = document.getElementById canvas_id
 
@@ -11,10 +14,21 @@ class webGLLesson02
     @gl.clearColor 0.0, 0.0, 0.0, 1.0
     @gl.enable @gl.DEPTH_TEST
 
-    @drawScene()
+    @rTri = 0
+    @rSquare = 0
+    @mvMatrixStack = []
+    @running = true
 
+    @tick()
+  
   stop: ->
-    #noop
+    @running = false
+
+  tick: =>
+    if @running
+      requestAnimFrame @tick 
+      @drawScene()
+      @animate()
 
   shaderFs: 
     """
@@ -158,6 +172,9 @@ class webGLLesson02
 
     mat4.translate @mvMatrix, @mvMatrix, triangleVector
 
+    @mvPushMatrix()
+    mat4.rotate @mvMatrix, @mvMatrix, degToRad(@rTri), [0, 1, 0]
+
     @gl.bindBuffer @gl.ARRAY_BUFFER, @triangleVertexPositionBuffer
     @gl.vertexAttribPointer @shaderProgram.vertexPositionAttribute, @triangleVertexPositionBuffer.itemSize, @gl.FLOAT, false, 0, 0
 
@@ -168,12 +185,17 @@ class webGLLesson02
 
     @gl.drawArrays @gl.TRIANGLES, 0, @triangleVertexPositionBuffer.numItems
 
+    @mvPopMatrix();
 
     #draw square
     squareVector = vec3.create()
     vec3.set squareVector, 3.0, 0.0, 0.0 
     
     mat4.translate @mvMatrix, @mvMatrix, squareVector
+
+    @mvPushMatrix();
+    
+    mat4.rotate @mvMatrix, @mvMatrix, degToRad(@rSquare), [1, 0, 0]
 
     @gl.bindBuffer @gl.ARRAY_BUFFER, @squareVertexPositionBuffer
     @gl.vertexAttribPointer @shaderProgram.vertexPositionAttribute, @squareVertexPositionBuffer.itemSize, @gl.FLOAT, false, 0, 0
@@ -184,7 +206,26 @@ class webGLLesson02
     @setMatrixUniforms()
   
     @gl.drawArrays @gl.TRIANGLE_STRIP, 0, @squareVertexPositionBuffer.numItems
+    
+    @mvPopMatrix()
+
+  animate: ->
+    timeNow = new Date().getTime()
+    if @lastTime
+      elapsed = timeNow - @lastTime
+      @rTri += ( 90 * elapsed) / 1000.0
+      @rSquare += ( 75 * elapsed) / 1000.0
+    @lastTime = timeNow
+
+  mvPushMatrix: ->
+    copy = mat4.create()
+    mat4.copy copy, @mvMatrix
+    @mvMatrixStack.push(copy)
+  mvPopMatrix: ->
+    if @mvMatrixStack.length is 0
+      throw "Invalid popMatrix!"
+    @mvMatrix = @mvMatrixStack.pop()
 
 
 jQuery ->
-  web_gl_lessons.add( "Lesson02", webGLLesson02 )
+  web_gl_lessons.add( "Lesson03", webGLLesson )
