@@ -19,6 +19,7 @@
       this.zRot = 0;
       this.mvMatrixStack = [];
       this.running = true;
+      this.ready = false;
       this.tick();
     }
 
@@ -29,8 +30,10 @@
     webGLLesson.prototype.tick = function() {
       if (this.running) {
         requestAnimFrame(this.tick);
-        this.drawScene();
-        return this.animate();
+        if (this.ready) {
+          this.drawScene();
+          return this.animate();
+        }
       }
     };
 
@@ -155,7 +158,8 @@
       this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
       this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
       this.gl.generateMipmap(this.gl.TEXTURE_2D);
-      return this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+      this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+      return this.ready = true;
     };
 
     webGLLesson.prototype.animate = function() {
